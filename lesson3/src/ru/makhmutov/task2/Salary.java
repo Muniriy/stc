@@ -1,9 +1,14 @@
 package ru.makhmutov.task2;
 
+import java.math.BigDecimal;
+import java.math.MathContext;
+import java.util.InputMismatchException;
 import java.util.Locale;
 import java.util.Scanner;
 
 public class Salary {
+
+    private final static BigDecimal ndfl = new BigDecimal(0.13);
 
     /**
      * The entry point of the Salary program
@@ -11,10 +16,10 @@ public class Salary {
      * @param args Array with parameters of the program
      */
     public static void main(String[] args) {
-        Salary s = new Salary();
-        float salary = s.scanNumber();
-        float ndfl = 0.13F;
-        float salaryMinusNdfl = salary * (1 - ndfl);
+        BigDecimal salary = scanNumber();
+        MathContext mc = new MathContext(6);
+        BigDecimal percentage = BigDecimal.ONE.subtract(ndfl, mc);
+        BigDecimal salaryMinusNdfl = salary.multiply(percentage, mc);
         System.out.println("\nThe salary without NDFL is " + salaryMinusNdfl + " Roubles");
     }
 
@@ -23,15 +28,23 @@ public class Salary {
      *
      * @return The obtained value received via scanning
      */
-    private float scanNumber() {
-        Scanner scanner = new Scanner(System.in).useLocale(Locale.ENGLISH);
-        System.out.print("\nType the salary (apply dot for mantissa if needed): ");
-        float value;
-        do {
-            value = scanner.nextFloat();
-            if (value <= 0)
-                System.out.print("\nPlease enter the positive number for the salary: ");
-        } while (value <= 0);
-        return value;
+    private static BigDecimal scanNumber() {
+        try (Scanner scanner = new Scanner(System.in).useLocale(Locale.ENGLISH)) {
+            System.out.print("\nType the salary (apply dot for mantissa if needed): ");
+            BigDecimal value = new BigDecimal(-1);
+            do {
+                try {
+                    value = scanner.nextBigDecimal();
+                } catch (InputMismatchException e) {
+                    System.out.print("\nDo not enter characters, try one more time: ");
+                    scanner.next();
+                    continue;
+                }
+                if (value.compareTo(BigDecimal.ZERO) <= 0) {
+                    System.out.print("\nPlease enter the positive number for the salary: ");
+                }
+            } while (value.compareTo(BigDecimal.ZERO) <= 0);
+            return value;
+        }
     }
 }

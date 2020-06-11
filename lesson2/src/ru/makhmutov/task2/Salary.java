@@ -2,6 +2,8 @@ package ru.makhmutov.task2;
 
 public class Salary {
 
+    private final static float ndfl = 0.13F;
+
     /**
      * The entry point of the Salary program
      *
@@ -11,7 +13,6 @@ public class Salary {
         if (args.length == 1) {
             float salary = Float.parseFloat(args[0]);
             if (salary > 0) {
-                float ndfl = 0.13F;
                 float salaryMinusNdfl = salary * (1 - ndfl);
                 System.out.println("\nThe salary without NDFL is " + salaryMinusNdfl + " Roubles");
             } else System.out.println("The value has to be greater than 0");

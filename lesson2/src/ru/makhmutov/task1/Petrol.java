@@ -2,13 +2,14 @@ package ru.makhmutov.task1;
 
 public class Petrol {
 
+    private final static float price = 43.5F;
+
     /**
      * The entry point of the Petrol program
      *
      * @param args Array with parameters of the program
      */
     public static void main(String[] args) {
-        float price = 43.5F;
         if (args.length == 1) {
             float amount = Float.parseFloat(args[0]);
             if (amount > 0) {
