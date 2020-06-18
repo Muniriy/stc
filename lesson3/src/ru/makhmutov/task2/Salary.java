@@ -8,7 +8,7 @@ import java.util.Scanner;
 
 public class Salary {
 
-    private final static BigDecimal ndfl = new BigDecimal(0.13);
+    private static final BigDecimal NDFL = new BigDecimal("0.13");
 
     /**
      * The entry point of the Salary program
@@ -18,7 +18,7 @@ public class Salary {
     public static void main(String[] args) {
         BigDecimal salary = scanNumber();
         MathContext mc = new MathContext(6);
-        BigDecimal percentage = BigDecimal.ONE.subtract(ndfl, mc);
+        BigDecimal percentage = BigDecimal.ONE.subtract(NDFL, mc);
         BigDecimal salaryMinusNdfl = salary.multiply(percentage, mc);
         System.out.println("\nThe salary without NDFL is " + salaryMinusNdfl + " Roubles");
     }

@@ -7,9 +7,9 @@ import java.util.Scanner;
 
 public class HotOrCold {
 
-    private final static int lowerBoundary = 1;
-    private final static int upperBoundary = 100;
-    private final static int numberOfTrials = 10;
+    private static final int LOWER_BOUNDARY = 1;
+    private static final int UPPER_BOUNDARY = 100;
+    private static final int NUMBER_OF_TRIALS = 10;
 
     /**
      * The entry point of the HotOrCold program
@@ -18,15 +18,15 @@ public class HotOrCold {
      */
     public static void main(String[] args) {
         Random rand = new Random();
-        int randomNumber = lowerBoundary + rand.nextInt(upperBoundary + 1 - lowerBoundary);
+        int randomNumber = LOWER_BOUNDARY + rand.nextInt(UPPER_BOUNDARY + 1 - LOWER_BOUNDARY);
         // initially previous choice is a equal to 0, which indicates that there were not previous trials
         int prevChoice = 0;
         try (Scanner scanner = new Scanner(System.in).useLocale(Locale.ENGLISH)) {
-            System.out.println("You have to guess the generated number for no more than " + numberOfTrials + " trials");
+            System.out.println("You have to guess the generated number for no more than " + NUMBER_OF_TRIALS + " trials");
             System.out.println("To stop the program type -1");
-            for (int i = 0; i < numberOfTrials; i++) {
+            for (int i = 0; i < NUMBER_OF_TRIALS; i++) {
                 System.out.print((i + 1) + ". ");
-                int choice = scanNumber(lowerBoundary, upperBoundary, scanner);
+                int choice = scanNumber(LOWER_BOUNDARY, UPPER_BOUNDARY, scanner);
                 if (choice == randomNumber) {
                     System.out.println("Congratulations! The value is guessed after " + (i + 1) + " trials ");
                     break;
@@ -38,7 +38,7 @@ public class HotOrCold {
                     System.out.println("Strange trial, please choose another number");
                 }
                 prevChoice = choice;
-                if (i == numberOfTrials - 1) {
+                if (i == NUMBER_OF_TRIALS - 1) {
                     System.out.println("Game Over. " + "Generated number is " + randomNumber);
                 }
             }

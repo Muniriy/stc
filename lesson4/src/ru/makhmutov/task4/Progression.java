@@ -71,9 +71,9 @@ public class Progression {
     private static double scanNumber(Scanner scanner, String name, double valueType, double lowerBoundary, double upperBoundary) {
 
         if (valueType == 0) {
-            System.out.format("\nType the integer number in range [%d; %d] to define the %s: ", (int) lowerBoundary, (int) upperBoundary, name);
+            System.out.format("%nType the integer number in range [%d; %d] to define the %s: ", (int) lowerBoundary, (int) upperBoundary, name);
         } else if (valueType == 1) {
-            System.out.format("\nType the double number in range [%6.3e; %6.3e] to define the %s: ", lowerBoundary, upperBoundary, name);
+            System.out.format("%nType the double number in range [%6.3e; %6.3e] to define the %s: ", lowerBoundary, upperBoundary, name);
         }
         double value = 0;
         boolean validityFlag;
@@ -87,7 +87,7 @@ public class Progression {
                 continue;
             }
             if (value < lowerBoundary || value > upperBoundary) {
-                System.out.format("\nPlease enter the number in given range: ");
+                System.out.format("%nPlease enter the number in given range: ");
                 validityFlag = false;
                 continue;
             }

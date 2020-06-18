@@ -5,8 +5,8 @@ import java.util.Scanner;
 
 public class TimeConverter {
 
-    private final static int minInHour = 60;
-    private final static int secInMin = 60;
+    private static final int MIN_IN_HOUR = 60;
+    private static final int SEC_IN_MIN = 60;
 
     /**
      * The entry point of the TimeConverter program
@@ -15,7 +15,7 @@ public class TimeConverter {
      */
     public static void main(String[] args) {
         float seconds = scanNumber();
-        float hours = seconds / secInMin / minInHour;
+        float hours = seconds / SEC_IN_MIN / MIN_IN_HOUR;
         System.out.println("\n" + seconds + " second(s) is equal to " + hours + " hour(s)");
     }
 

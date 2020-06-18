@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 public class MultiplicationTable {
 
-    static int initialMultiplier = 2;
+    private static final int INITIAL_MULTIPLIER = 2;
 
     /**
      * This method allows to read valid input values.
@@ -16,7 +16,7 @@ public class MultiplicationTable {
      */
     private static int scanNumber() {
         try (Scanner scanner = new Scanner(System.in).useLocale(Locale.ENGLISH)) {
-            System.out.print("\nType the integer number not less than " + initialMultiplier +
+            System.out.print("\nType the integer number not less than " + INITIAL_MULTIPLIER +
                     ",\nwhich will be multiplier for the last collumn: ");
             double value = 0; // the initial value should be out of boundaries to be a barrier for the program
             do {
@@ -27,10 +27,10 @@ public class MultiplicationTable {
                     scanner.next();
                     continue;
                 }
-                if (value < initialMultiplier || value != (int) value) {
-                    System.out.print("\nPlease enter the integer number not less than " + initialMultiplier + ": ");
+                if (value < INITIAL_MULTIPLIER || value != (int) value) {
+                    System.out.print("\nPlease enter the integer number not less than " + INITIAL_MULTIPLIER + ": ");
                 }
-            } while (value < initialMultiplier || value != (int) value);
+            } while (value < INITIAL_MULTIPLIER || value != (int) value);
             return (int) value;
         }
     }
@@ -45,9 +45,9 @@ public class MultiplicationTable {
      */
     public static void main(String[] args) {
         int tableSize = scanNumber();
-        for (int i = initialMultiplier; i <= tableSize; i++) {
+        for (int i = INITIAL_MULTIPLIER; i <= tableSize; i++) {
             for (int j = 1; j <= 10; j++) {
-                System.out.format("%2d x %2d = %2d\n", i, j, i * j);
+                System.out.format("%2d x %2d = %2d%n", i, j, i * j);
             }
             System.out.println();
         }
