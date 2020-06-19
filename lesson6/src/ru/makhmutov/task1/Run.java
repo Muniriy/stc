@@ -22,7 +22,7 @@ public class Run {
      *                     It is assumed that there are 2 types:
      *                     instructor and assistant
      */
-    private static void hireEmployee(String employeeType, Run run, ArrayList<Employee> employees2) {
+    private static void hireEmployee(String employeeType, Run run, ArrayList<Employee> employees) {
         char[] existingGenders = new char[3];
         existingGenders[0] = 'm';
         existingGenders[1] = 'f';
@@ -42,13 +42,13 @@ public class Run {
             case "instructor":
                 float hirshIndex = run.scan(scanner, "h-index of the " + employeeType, 0F);
                 Instructor instructor = new Instructor(id, name, surname, gender, salary, hirshIndex);
-                employees2.add(instructor);
+                employees.add(instructor);
                 break;
             case "assistant":
                 boolean englishSpeaker;
                 englishSpeaker = run.scan(scanner, "'y' if " + employeeType + " speaks English. Otherwise type 'n'", answers) == 'y';
                 Assistant assistant = new Assistant(id, name, surname, gender, salary, englishSpeaker);
-                employees2.add(assistant);
+                employees.add(assistant);
                 break;
             default:
                 System.out.println("Non-existent type of employee");
@@ -66,12 +66,12 @@ public class Run {
      */
     public static void main(String[] args) {
         Run run = new Run();
-        ArrayList<Employee> employees2 = new ArrayList<>(2);
-        hireEmployee("instructor", run, employees2);
-        hireEmployee("assistant", run, employees2);
-        run.displayEmployees(employees2);
-        run.fireEmployee(employees2, 1);
-        run.displayEmployees(employees2);
+        ArrayList<Employee> employees = new ArrayList<>(2);
+        hireEmployee("instructor", run, employees);
+        hireEmployee("assistant", run, employees);
+        run.displayEmployees(employees);
+        run.fireEmployee(employees, 1);
+        run.displayEmployees(employees);
     }
 
     /**
