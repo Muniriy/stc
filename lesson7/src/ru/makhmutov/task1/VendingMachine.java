@@ -151,14 +151,14 @@ public class VendingMachine {
                         System.out.println("Not enough money. Insert more or choose another drink");
                         System.out.print("Would you like to insert more money? (y/n): ");
                         insertionCompleted = scanChar(scanner);
-                        if (!insertionCompleted) {
-                            break;
-                        } else {
+                        if (insertionCompleted) {
                             System.out.print("Would you like to choose another drink? (y/n): ");
                             drinkChosen = scanChar(scanner);
                             if (!drinkChosen) {
                                 break;
                             }
+                        } else {
+                            break;
                         }
                     } else {
                         insertedMoney -= machine.getPrice();

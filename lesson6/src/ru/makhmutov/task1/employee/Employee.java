@@ -1,6 +1,6 @@
 package ru.makhmutov.task1.employee;
 
-public class Employee {
+public abstract class Employee {
 
     private final int id;
     private String name;

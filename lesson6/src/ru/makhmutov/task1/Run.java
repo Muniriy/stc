@@ -4,10 +4,7 @@ import ru.makhmutov.task1.employee.Assistant;
 import ru.makhmutov.task1.employee.Employee;
 import ru.makhmutov.task1.employee.Instructor;
 
-import java.util.ArrayList;
-import java.util.InputMismatchException;
-import java.util.Locale;
-import java.util.Scanner;
+import java.util.*;
 
 public class Run {
 
@@ -22,7 +19,7 @@ public class Run {
      *                     It is assumed that there are 2 types:
      *                     instructor and assistant
      */
-    private static void hireEmployee(String employeeType, Run run, ArrayList<Employee> employees) {
+    private static void hireEmployee(String employeeType, Run run, List<Employee> employees, Scanner scanner) {
         char[] existingGenders = new char[3];
         existingGenders[0] = 'm';
         existingGenders[1] = 'f';
@@ -32,12 +29,12 @@ public class Run {
         answers[0] = 'y';
         answers[1] = 'n';
 //        try (Scanner scanner = new Scanner(System.in).useLocale(Locale.ENGLISH)) {
-        Scanner scanner = new Scanner(System.in).useLocale(Locale.ENGLISH);
+//        Scanner scanner = new Scanner(System.in).useLocale(Locale.ENGLISH);
         int id = ++employeeNumber;
-        String name = run.scan(scanner, "the name of the " + employeeType);
-        String surname = run.scan(scanner, "the surname of the " + employeeType);
+        String name = run.scan(scanner, "name of the " + employeeType);
+        String surname = run.scan(scanner, "surname of the " + employeeType);
         char gender = run.scan(scanner, "the gender of the " + employeeType, existingGenders);
-        float salary = run.scan(scanner, "the salary for the " + employeeType, minimalSalary);
+        float salary = run.scan(scanner, "salary for the " + employeeType, minimalSalary);
         switch (employeeType) {
             case "instructor":
                 float hirshIndex = run.scan(scanner, "h-index of the " + employeeType, 0F);
@@ -66,9 +63,12 @@ public class Run {
      */
     public static void main(String[] args) {
         Run run = new Run();
-        ArrayList<Employee> employees = new ArrayList<>(2);
-        hireEmployee("instructor", run, employees);
-        hireEmployee("assistant", run, employees);
+        int employeeNumber = 2;
+        List<Employee> employees = new ArrayList<>(employeeNumber);
+        try (Scanner scanner = new Scanner(System.in).useLocale(Locale.ENGLISH)) {
+            hireEmployee("instructor", run, employees, scanner);
+            hireEmployee("assistant", run, employees, scanner);
+        }
         run.displayEmployees(employees);
         run.fireEmployee(employees, 1);
         run.displayEmployees(employees);
@@ -80,7 +80,7 @@ public class Run {
      * @param employees The array with all employees
      * @param id        The ID of the employee to fire
      */
-    private void fireEmployee(ArrayList<Employee> employees, int id) {
+    private void fireEmployee(List<Employee> employees, int id) {
         if (id > 0 && id <= employeeNumber) {
             System.out.format("University employee with ID equal %d was fired: ", id);
             employees.removeIf(nextEmployee -> nextEmployee.getId() == id);
@@ -94,7 +94,7 @@ public class Run {
      *
      * @param employees The array of all employees
      */
-    private void displayEmployees(ArrayList<Employee> employees) {
+    private void displayEmployees(List<Employee> employees) {
         System.out.println();
         System.out.println("All university employees:");
         for (Employee employee : employees) {
@@ -139,7 +139,7 @@ public class Run {
         boolean validityFlag = false;
         System.out.print("\nType the " + inputType + ": ");
         do {
-            value = scanner.nextLine();
+            value = scanner.next();
             if (isAlphabetSymbol(value) && value.length() >= MINIMAL_STRING_LENGTH) {
                 validityFlag = true;
             } else {
