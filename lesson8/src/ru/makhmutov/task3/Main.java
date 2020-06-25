@@ -16,6 +16,10 @@ public class Main {
 
     /**
      * The entry point of the Documents program.
+     * The list of contracts created, each contract is filled
+     * by input data. After filling information, all documents
+     * are displayed. For each document realted act is generated
+     * and displayed
      *
      * @param args Array with parameters of the program
      */

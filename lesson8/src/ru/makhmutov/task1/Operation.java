@@ -9,10 +9,20 @@ public enum Operation {
 
     private final String op;
 
+    /**
+     * Constructor for Operation enum
+     *
+     * @param op Operation name
+     */
     Operation(String op) {
         this.op = op;
     }
 
+    /**
+     * This is getter method for operation name
+     *
+     * @return Operation name
+     */
     public String getOp() {
         return op;
     }
