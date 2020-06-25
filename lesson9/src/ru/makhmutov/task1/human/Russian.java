@@ -2,9 +2,6 @@ package ru.makhmutov.task1.human;
 
 public class Russian extends Human {
 
-//    private boolean runs = false;
-//    private boolean swims = false;
-
     /**
      * This methods allows to start running
      */
