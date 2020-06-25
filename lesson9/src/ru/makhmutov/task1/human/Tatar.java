@@ -2,16 +2,13 @@ package ru.makhmutov.task1.human;
 
 public class Tatar extends Human {
 
-    private boolean runs = false;
-    private boolean swims = false;
-
     /**
      * This methods allows to start running
      */
     @Override
     public void startRunning() {
-        if (!runs) {
-            runs = true;
+        if (!isRuns()) {
+            setRuns(true);
             System.out.println("Tatar started running");
         } else {
             System.out.println("Tatar already runs");
@@ -23,8 +20,8 @@ public class Tatar extends Human {
      */
     @Override
     public void stopRunning() {
-        if (runs) {
-            runs = false;
+        if (isRuns()) {
+            setRuns(false);
             System.out.println("Tatar stopped running");
         } else {
             System.out.println("Tatar already doesn't run");
@@ -36,8 +33,8 @@ public class Tatar extends Human {
      */
     @Override
     public void startSwimming() {
-        if (!swims) {
-            swims = true;
+        if (!isSwims()) {
+            setSwims(true);
             System.out.println("Tatar started swimming");
         } else {
             System.out.println("Tatar already swims");
@@ -49,8 +46,8 @@ public class Tatar extends Human {
      */
     @Override
     public void stopSwimming() {
-        if (swims) {
-            swims = false;
+        if (isSwims()) {
+            setSwims(false);
             System.out.println("Tatar stopped swimming");
         } else {
             System.out.println("Tatar already doesn't swim");

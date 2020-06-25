@@ -1,7 +1,9 @@
 package ru.makhmutov.task1;
 
 import ru.makhmutov.task1.animal.Duck;
+import ru.makhmutov.task1.animal.Penguin;
 import ru.makhmutov.task1.human.Armenian;
+import ru.makhmutov.task1.human.Russian;
 
 public class Main {
 
@@ -26,9 +28,21 @@ public class Main {
 
         System.out.println();
 
+        Penguin penguin = new Penguin();
+        System.out.println(penguin.getName());
+        duck.startSwimming();
+        duck.stopSwimming();
+
+        System.out.println();
+
         Armenian armenian = new Armenian();
         armenian.startRunning();
         armenian.stopRunning();
         armenian.stopSwimming();
+
+        System.out.println();
+
+        Russian russian = new Russian();
+        russian.startSwimming();
     }
 }

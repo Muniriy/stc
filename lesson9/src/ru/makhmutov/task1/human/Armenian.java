@@ -1,17 +1,14 @@
 package ru.makhmutov.task1.human;
 
 public class Armenian extends Human {
-    
-    private boolean runs = false;
-    private boolean swims = false;
 
     /**
      * This methods allows to start running
      */
     @Override
     public void startRunning() {
-        if (!runs) {
-            runs = true;
+        if (!isRuns()) {
+            setRuns(true);
             System.out.println("Armenian started running");
         } else {
             System.out.println("Armenian already runs");
@@ -23,8 +20,8 @@ public class Armenian extends Human {
      */
     @Override
     public void stopRunning() {
-        if (runs) {
-            runs = false;
+        if (isRuns()) {
+            setRuns(false);
             System.out.println("Armenian stopped running");
         } else {
             System.out.println("Armenian already doesn't run");
@@ -36,8 +33,8 @@ public class Armenian extends Human {
      */
     @Override
     public void startSwimming() {
-        if (!swims) {
-            swims = true;
+        if (!isSwims()) {
+            setSwims(true);
             System.out.println("Armenian started swimming");
         } else {
             System.out.println("Armenian already swims");
@@ -49,8 +46,8 @@ public class Armenian extends Human {
      */
     @Override
     public void stopSwimming() {
-        if (swims) {
-            swims = false;
+        if (isSwims()) {
+            setSwims(false);
             System.out.println("Armenian stopped swimming");
         } else {
             System.out.println("Armenian already doesn't swim");
