@@ -1,6 +1,6 @@
 package ru.makhmutov.task3.documents;
 
-import java.util.Calendar;
+import java.time.LocalDate;
 
 public class Act extends Document {
 
@@ -14,7 +14,7 @@ public class Act extends Document {
      * @param goods Array of goods from contract
      * @param actID Act ID
      */
-    public Act(int id, Calendar date, String[] goods, int actID) {
+    public Act(int id, LocalDate date, String[] goods, int actID) {
         super(id, date, goods);
         this.actID = actID;
     }

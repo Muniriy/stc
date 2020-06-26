@@ -4,9 +4,10 @@ import ru.makhmutov.task3.documents.Act;
 import ru.makhmutov.task3.documents.Contract;
 import ru.makhmutov.task3.documents.Document;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.*;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
 
 public class Main {
 
@@ -55,11 +56,12 @@ public class Main {
         for (int i = 0; i < goodsTypes; i++) {
             goods[i] = main.scan(scanner, "name of good " + (i + 1));
         }
-        Calendar date = new GregorianCalendar();
-        date.set(Calendar.YEAR, main.scan(scanner, "contract year", 2010, 2020));
-        date.set(Calendar.MONTH, main.scan(scanner, "contract month number", 1, 12) - 1);
-        date.set(Calendar.DAY_OF_MONTH, main.scan(scanner, "contract day of month", 1, date.getActualMaximum(Calendar.DAY_OF_MONTH)));
-        doc = new Contract(++docID, date, goods);
+
+        int year = main.scan(scanner, "contract year", 2010, 2020);
+        int month = main.scan(scanner, "contract month number", 1, 12);
+        int dayOfMonth = main.scan(scanner, "contract day of month", 1, LocalDate.of(year, month, 1).lengthOfMonth());
+        LocalDate localDate = LocalDate.of(year, month, dayOfMonth);
+        doc = new Contract(++docID, localDate, goods);
         System.out.println("Contract " + docID + " is created");
         System.out.println();
         return doc;
@@ -71,14 +73,13 @@ public class Main {
      * @param documents List with all documents
      */
     private static void displayDocuments(List<Document> documents) {
-        DateFormat df = new SimpleDateFormat("dd.MM.yyyy");
         for (Document d : documents) {
             System.out.println("Document: " + d.getClass().getSimpleName());
             if (d instanceof Act) {
                 System.out.println("\tAct ID is " + ((Act) d).getActID());
             }
             System.out.println("\tContract ID is " + d.getId());
-            System.out.println("\tDate is " + df.format(d.getDate().getTime()));
+            System.out.println("\tDate is " + d.getDate());
             System.out.println("\tGoods are:");
             for (int i = 0; i < d.getGoods().length; i++) {
                 System.out.format("\t\t%d. %s%n", (i + 1), d.getGoods()[i]);
@@ -98,29 +99,28 @@ public class Main {
      */
     private static Act contractToActConverter(Document document, Scanner scanner) {
         Main main = new Main();
-        Calendar date = new GregorianCalendar();
         Act act;
         System.out.format("Creation of the act %d: %n", (actID + 1));
-        date.set(Calendar.YEAR, main.scan(scanner, "act year",
-                document.getDate().get(Calendar.YEAR), 2020));
-        if (document.getDate().get(Calendar.YEAR) == date.get(Calendar.YEAR)) {
-            date.set(Calendar.MONTH, main.scan(scanner,
-                    "act month number", document.getDate().get(Calendar.MONTH) + 1, 12) - 1);
-            if (document.getDate().get(Calendar.MONTH) == date.get(Calendar.MONTH)) {
-                date.set(Calendar.DAY_OF_MONTH, main.scan(scanner, "act day of month",
-                        document.getDate().get(Calendar.DAY_OF_MONTH), date.getActualMaximum(Calendar.DAY_OF_MONTH)));
-            } else if (document.getDate().get(Calendar.MONTH) < date.get(Calendar.MONTH)) {
-                date.set(Calendar.DAY_OF_MONTH, main.scan(scanner, "act day of month",
-                        1, date.getActualMaximum(Calendar.DAY_OF_MONTH)));
+        int year = main.scan(scanner, "act year", document.getDate().getYear(), 2020);
+        int month = 0;
+        int dayOfMonth = 0;
+        if (document.getDate().getYear() == year) {
+            month = main.scan(scanner, "act month number",
+                    document.getDate().getMonthValue(), 12);
+            if (document.getDate().getMonthValue() == month) {
+                dayOfMonth = main.scan(scanner, "act day of month",
+                        document.getDate().getDayOfMonth(), LocalDate.of(year, month, 1).lengthOfMonth());
+            } else if (document.getDate().getMonthValue() < month) {
+                dayOfMonth = main.scan(scanner, "act day of month",
+                        1, LocalDate.of(year, month, 1).lengthOfMonth());
             }
-
-        } else if (document.getDate().get(Calendar.YEAR) < date.get(Calendar.YEAR)) {
-            date.set(Calendar.MONTH, main.scan(scanner,
-                    "act month number", 1, 12) - 1);
-            date.set(Calendar.DAY_OF_MONTH, main.scan(scanner, "act day of month",
-                    1, date.getActualMaximum(Calendar.DAY_OF_MONTH)));
+        } else if (document.getDate().getYear() < year) {
+            month = main.scan(scanner, "act month number", 1, 12);
+            dayOfMonth = main.scan(scanner, "act day of month", 1,
+                    LocalDate.of(year, month, 1).lengthOfMonth());
         }
-        act = new Act(document.getId(), date, document.getGoods(), ++actID);
+        LocalDate localDate = LocalDate.of(year, month, dayOfMonth);
+        act = new Act(document.getId(), localDate, document.getGoods(), ++actID);
         System.out.println("Act " + actID + " is created");
         System.out.println();
         return act;

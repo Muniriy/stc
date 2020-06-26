@@ -1,10 +1,10 @@
 package ru.makhmutov.task3.documents;
 
-import java.util.Calendar;
+import java.time.LocalDate;
 
 public abstract class Document {
     private final int id;
-    private final Calendar date;
+    private final LocalDate date;
     private final String[] goods;
 
     /**
@@ -14,7 +14,7 @@ public abstract class Document {
      * @param date  Date of document creation
      * @param goods Goods from document
      */
-    public Document(int id, Calendar date, String[] goods) {
+    public Document(int id, LocalDate date, String[] goods) {
         this.id = id;
         this.date = date;
         this.goods = goods;
@@ -34,7 +34,7 @@ public abstract class Document {
      *
      * @return Date of the document creation
      */
-    public Calendar getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
