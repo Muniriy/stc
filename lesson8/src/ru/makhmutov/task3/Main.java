@@ -19,7 +19,7 @@ public class Main {
      * The entry point of the Documents program.
      * The list of contracts created, each contract is filled
      * by input data. After filling information, all documents
-     * are displayed. For each document realted act is generated
+     * are displayed. For each document related act is generated
      * and displayed
      *
      * @param args Array with parameters of the program
@@ -167,7 +167,7 @@ public class Main {
     /**
      * This method allows to read valid input String values.
      *
-     * @param scanner   The object of Scanner class needed for scanning the number
+     * @param scanner   The object of Scanner class needed for scanning the string
      * @param inputType The string which defines the name of the value
      * @return The obtained value received via scanning
      */
