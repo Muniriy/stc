@@ -29,7 +29,6 @@ public class Censor {
      * This method allows to read valid input String values.
      *
      * @param scanner The object of Scanner class needed for scanning the phrase
-     * @return The obtained value received via scanning
      */
     private void scan(Scanner scanner) {
         String value;

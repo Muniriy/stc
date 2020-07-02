@@ -1,14 +1,14 @@
 package ru.makhmutov.task1.animal;
 
-import ru.makhmutov.task1.Fly;
-import ru.makhmutov.task1.Run;
-import ru.makhmutov.task1.Swim;
-
-public class Duck extends Animal implements Fly, Swim, Run {
+public class Duck extends Animal {
 
     private boolean runs = false;
     private boolean swims = false;
     private boolean flies = false;
+
+    public Duck(String name) {
+        super(name);
+    }
 
     /**
      * This is getter method for the animal name
@@ -17,7 +17,7 @@ public class Duck extends Animal implements Fly, Swim, Run {
      */
     @Override
     public String getName() {
-        return "Duck";
+        return this.getClass().getSimpleName().concat(" " + name);
     }
 
     /**

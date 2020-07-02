@@ -1,10 +1,12 @@
 package ru.makhmutov.task1.animal;
 
-import ru.makhmutov.task1.Run;
-
-public class Ant extends Animal implements Run {
+public class Ant extends Animal {
 
     private boolean runs = false;
+
+    public Ant(String name) {
+        super(name);
+    }
 
     /**
      * This is getter method for the animal name
@@ -13,7 +15,7 @@ public class Ant extends Animal implements Run {
      */
     @Override
     public String getName() {
-        return "Ant";
+        return this.getClass().getSimpleName().concat(" " + name);
     }
 
     /**

@@ -1,12 +1,13 @@
 package ru.makhmutov.task1.animal;
 
-import ru.makhmutov.task1.Run;
-import ru.makhmutov.task1.Swim;
-
-public class Penguin extends Animal implements Swim, Run {
+public class Penguin extends Animal {
 
     private boolean runs = false;
     private boolean swims = false;
+
+    public Penguin(String name) {
+        super(name);
+    }
 
     /**
      * This is getter method for the animal name
@@ -15,7 +16,7 @@ public class Penguin extends Animal implements Swim, Run {
      */
     @Override
     public String getName() {
-        return "Penguin";
+        return this.getClass().getSimpleName().concat(" " + name);
     }
 
     /**

@@ -1,7 +1,7 @@
 package ru.makhmutov.task1.human;
 
-import ru.makhmutov.task1.Run;
-import ru.makhmutov.task1.Swim;
+import ru.makhmutov.task1.api.Run;
+import ru.makhmutov.task1.api.Swim;
 
 public abstract class Human implements Run, Swim {
 
@@ -27,9 +27,9 @@ public abstract class Human implements Run, Swim {
 
     /**
      * This is setter method for runs field
-     *
-     * @param runs The boolean field is true if instance should run,
-     *             false - otherwise
+     * <p>
+     * "зфкфь кгты Еру ищщдуфт ашудв шы екгу ша штыефтсу ырщгдв кгтб
+     * false - otherwise
      */
     protected void setRuns(boolean runs) {
         this.runs = runs;

@@ -120,10 +120,10 @@ public class Calculator {
      * @param upperBoundary   The upper boundary for input value
      * @return The obtained value received via scanning
      */
-    private static double scanNumber(Scanner scanner, boolean checkBoundaries, double lowerBoundary, double upperBoundary) {
+    private static double scanNumber(Scanner scanner, boolean checkBoundaries, double lowerBoundary, double upperBoundary, String type) {
         double value = -1;
         boolean validityFlag;
-        System.out.print("\nType the value: ");
+        System.out.print("\nType the " + type + ": ");
         do {
             try {
                 value = scanner.nextDouble();
@@ -174,11 +174,11 @@ public class Calculator {
             double value1;
             double value2;
             if (operation != Operation.TAKE_PERCENTAGE) {
-                value1 = scanNumber(scanner, false, 0, 0);
-                value2 = scanNumber(scanner, false, 0, 0);
+                value1 = scanNumber(scanner, false, 0, 0, "first value");
+                value2 = scanNumber(scanner, false, 0, 0, "second value");
             } else {
-                value1 = scanNumber(scanner, true, 0, 0);
-                value2 = scanNumber(scanner, true, 0, 100);
+                value1 = scanNumber(scanner, true, 0, 0, "value");
+                value2 = scanNumber(scanner, true, 0, 100, "percentage");
             }
             switch (operation) {
                 case ADD:
