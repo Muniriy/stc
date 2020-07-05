@@ -1,11 +1,15 @@
 package ru.makhmutov.task1;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.core.Logger;
+
 import java.util.InputMismatchException;
 import java.util.Locale;
 import java.util.Scanner;
 
 public class VendingMachine {
 
+    private static final Logger log = (Logger) LogManager.getLogger(VendingMachine.class);
     private int insertedMoney = 0;
 
     /**
@@ -44,7 +48,7 @@ public class VendingMachine {
         do {
             value = scanner.next().charAt(0);
             if (value != 'y' && value != 'n') {
-                System.out.print("\nType only 'y' or 'n', try one more time: ");
+                log.warn("Type only 'y' or 'n', try one more time: ");
             }
         } while (value != 'y' && value != 'n');
         return (value != 'y');
@@ -63,7 +67,7 @@ public class VendingMachine {
             try {
                 value = scanner.nextDouble();
             } catch (InputMismatchException e) {
-                System.out.print("\nDo not enter characters, try one more time: ");
+                log.warn("Do not enter characters, try one more time: ");
                 scanner.next();
                 continue;
             }
@@ -83,7 +87,7 @@ public class VendingMachine {
                 }
             }
             if (!inserted) {
-                System.out.format("%nPlease insert applicable %s: ", type);
+                log.warn("Please insert applicable {}: ", type);
             }
 
         } while (!inserted);
@@ -95,9 +99,12 @@ public class VendingMachine {
      * with their numbers and prices
      */
     private void seeMenu() {
-        System.out.println("The menu is:");
+        log.info("The menu is:");
+        System.out.println();
         for (Machine machine : Machine.values()) {
-            System.out.printf("%d. %9s - %d₽%n", (machine.ordinal() + 1), machine.getName(), machine.getPrice());
+//            System.out.printf("%d. %9s - %d₽%n", (machine.ordinal() + 1), machine.getName(), machine.getPrice());
+            log.info("{}. {} - {}₽", (machine.ordinal() + 1), machine.getName(), machine.getPrice());
+            System.out.println();
         }
     }
 
@@ -112,19 +119,20 @@ public class VendingMachine {
     private void insertMoney(Scanner scanner, boolean firstChoice) {
         boolean insertionUnnedeed = false;
         if (insertedMoney > 0 && firstChoice) {
-            System.out.print("Would you like to add more money? (y/n): ");
+            log.info("Would you like to add more money? (y/n): ");
             insertionUnnedeed = scanChar(scanner);
         }
         if (!insertionUnnedeed) {
             boolean insertionCompleted;
+            StringBuilder useOnly = new StringBuilder("Please insert the money. Use only coins and banknotes of ");
+            for (Money money : Money.values()) {
+                useOnly.append(money.getDenomination() + " ");
+            }
+            useOnly.append("denomination: ");
             do {
-                System.out.print("Please insert the money. Use only coins and banknotes of ");
-                for (Money money : Money.values()) {
-                    System.out.print(money.getDenomination() + " ");
-                }
-                System.out.print("denomination: ");
+                log.info(useOnly);
                 insertedMoney += scanNumber(scanner, "money");
-                System.out.print("Totally you inserted " + insertedMoney + "₽. Would you like to insert more money? (y/n): ");
+                log.info("Totally you inserted {}₽. Would you like to insert more money? (y/n): ", insertedMoney);
                 insertionCompleted = scanChar(scanner);
             } while (!insertionCompleted);
         }
@@ -143,16 +151,17 @@ public class VendingMachine {
         boolean insertionCompleted = true;
         boolean drinkChosen = true;
         do {
-            System.out.print("Choose the item from the menu by typing its number: ");
+            log.info("Choose the item from the menu by typing its number: ");
             int drinkItem = scanNumber(scanner, "vending machine items");
             for (Machine machine : Machine.values()) {
                 if ((machine.ordinal() + 1) == drinkItem) {
                     if (insertedMoney < machine.getPrice()) {
-                        System.out.println("Not enough money. Insert more or choose another drink");
-                        System.out.print("Would you like to insert more money? (y/n): ");
+                        log.warn("Not enough money. Insert more or choose another drink.");
+                        System.out.println();
+                        log.info("Would you like to insert more money? (y/n): ");
                         insertionCompleted = scanChar(scanner);
                         if (insertionCompleted) {
-                            System.out.print("Would you like to choose another drink? (y/n): ");
+                            log.info("Would you like to choose another drink? (y/n): ");
                             drinkChosen = scanChar(scanner);
                             if (!drinkChosen) {
                                 break;
@@ -162,7 +171,8 @@ public class VendingMachine {
                         }
                     } else {
                         insertedMoney -= machine.getPrice();
-                        System.out.println("Please take your " + machine.getName());
+                        log.info("Please take your {}", machine.getName());
+                        System.out.println();
                     }
                 }
             }
@@ -182,14 +192,14 @@ public class VendingMachine {
     private boolean completePurchase(Scanner scanner) {
         boolean purchaseCompleted;
         if (insertedMoney > 0) {
-            System.out.format("You have %d₽ left. Would you like to buy more drinks? (y/n): ", insertedMoney);
+            log.info("You have {}₽ left. Would you like to buy more drinks? (y/n): ", insertedMoney);
         } else {
-            System.out.print("Would you like to buy more drinks? (y/n): ");
+            log.info("Would you like to buy more drinks? (y/n): ");
         }
         purchaseCompleted = scanChar(scanner);
         if (purchaseCompleted) {
             insertedMoney = 0;
-            System.out.println("Thank you! Come back later!");
+            log.info("Thank you! Come back later!");
         }
         return purchaseCompleted;
     }
