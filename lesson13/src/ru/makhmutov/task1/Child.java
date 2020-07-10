@@ -6,8 +6,9 @@ public class Child {
      * This method allows child to eat the food.
      * In case of preferable food,
      *
-     * @param food
-     * @throws UneatenFoodException
+     * @param food The food served by mother
+     * @throws UneatenFoodException An exception in case of child
+     *                              refusing to eat the food
      */
     public void eat(Food food) throws UneatenFoodException {
         String like = "\tСъел " + food.getName().toLowerCase() + " за обе щеки";
