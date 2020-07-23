@@ -1,12 +1,12 @@
 package ru.makhmutov.task2;
 
 import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.core.Logger;
+import org.apache.logging.log4j.Logger;
 
 import java.io.File;
 
 public class RecursivePass {
-    private static final Logger log = (Logger) LogManager.getLogger(RecursivePass.class);
+    private static final Logger log = LogManager.getLogger(RecursivePass.class);
 
     /**
      * The entry point of RecursivePass program.

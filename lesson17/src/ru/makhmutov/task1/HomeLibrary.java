@@ -1,14 +1,14 @@
 package ru.makhmutov.task1;
 
 import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.core.Logger;
+import org.apache.logging.log4j.Logger;
 
 import java.io.*;
 import java.time.LocalDate;
 import java.util.*;
 
 public class HomeLibrary {
-    private static final Logger log = (Logger) LogManager.getLogger(HomeLibrary.class);
+    private static final Logger log = LogManager.getLogger(HomeLibrary.class);
     private static final int MIN_STRING_LENGTH = 2;
     private static final int MAX_STRING_LENGTH = 20;
     private static final int MIN_PAGES = 10;

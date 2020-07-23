@@ -1,7 +1,7 @@
 package ru.makhmutov.task1;
 
 import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.core.Logger;
+import org.apache.logging.log4j.Logger;
 
 import java.io.File;
 import java.io.IOException;
@@ -11,7 +11,7 @@ import java.nio.file.NoSuchFileException;
 import static java.lang.Thread.sleep;
 
 public class FileProcessor {
-    private static final Logger log = (Logger) LogManager.getLogger(FileProcessor.class);
+    private static final Logger log = LogManager.getLogger(FileProcessor.class);
 
     /**
      * The entry point of FileProcessor program.
