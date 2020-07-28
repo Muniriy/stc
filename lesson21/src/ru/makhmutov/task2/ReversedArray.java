@@ -1,4 +1,4 @@
-package task2;
+package ru.makhmutov.task2;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
