@@ -11,12 +11,11 @@ public class Dataseries {
     private int cloudcover;
     private int seeing;
     private int transparency;
+    private int rh2m;
+    private int temp2m;
 
     @JsonProperty("lifted_index")
     private int liftedIndex;
-
-    private int rh2m;
-    private int temp2m;
 
     /**
      * This is the getter for the time point

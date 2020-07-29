@@ -7,7 +7,8 @@ import java.util.Random;
 
 public class ReversedArray {
     private static final Logger log = LogManager.getLogger(ReversedArray.class);
-    private static final int ARRAY_SIZE = 9;
+    private static final int ARRAY_SIZE1 = 9;
+    private static final int ARRAY_SIZE2 = 10;
 
     /**
      * The entry point of ReversedArray program.
@@ -17,11 +18,19 @@ public class ReversedArray {
      * @param args Array with parameters of the program
      */
     public static void main(String[] args) {
-        int[] array = new int[ARRAY_SIZE];
-        fillArray(array);
-        displayArray(array);
-        reverseArray(array);
-        displayArray(array);
+        int[] array1 = new int[ARRAY_SIZE1];
+        fillArray(array1);
+        displayArray(array1);
+        reverseArray(array1);
+        displayArray(array1);
+
+        System.out.println();
+
+        int[] array2 = new int[ARRAY_SIZE2];
+        fillArray(array2);
+        displayArray(array2);
+        reverseArray(array2);
+        displayArray(array2);
     }
 
     /**
