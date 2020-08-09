@@ -11,17 +11,17 @@ public class SetFiltering {
 
     /**
      * The entry point of SetFiltering program.
-     * This program filter all elements of the Set
-     * with the odd length and leave elements with even
+     * This program filters all elements of the Set
+     * with the odd length and leaves elements with even
      * length
      *
      * @param args Array with parameters of the program
      */
     public static void main(String[] args) {
         SetFiltering sf = new SetFiltering();
-        Set<String> set = sf.createSet();
+        Set<String> set = sf.initializeSet();
         sf.displaySet(set);
-        set = sf.removeEvenLength(set);
+        sf.removeEvenLength(set);
         sf.displaySet(set);
     }
 
@@ -31,7 +31,7 @@ public class SetFiltering {
      *
      * @return The filled set
      */
-    private Set<String> createSet() {
+    private Set<String> initializeSet() {
         Set<String> set = new HashSet<>();
         set.add("Hello");
         set.add("world");
@@ -62,7 +62,7 @@ public class SetFiltering {
      * string is even or not
      *
      * @param string The input string
-     * @return True if the string length is even,
+     * @return true if the string length is even,
      * otherwise - false
      */
     private boolean isEvenLength(String string) {
@@ -76,9 +76,9 @@ public class SetFiltering {
      * @param set The input set
      * @return The set with removed even-length elements
      */
-    public Set<String> removeEvenLength(Set<String> set) {
+    public void removeEvenLength(Set<String> set) {
         set.removeIf(this::isEvenLength);
         log.info("Elements with even length are removed from set");
-        return set;
+//        return set;
     }
 }

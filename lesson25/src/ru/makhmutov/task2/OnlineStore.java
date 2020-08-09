@@ -1,4 +1,4 @@
-package ru.makhmutov.task1;
+package ru.makhmutov.task2;
 
 import java.util.List;
 

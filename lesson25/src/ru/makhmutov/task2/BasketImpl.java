@@ -1,15 +1,16 @@
-package ru.makhmutov.task1;
+package ru.makhmutov.task2;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.util.LinkedList;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-public class BasketImplementation implements Basket {
-    private static final Logger log = LogManager.getLogger(BasketImplementation.class);
-    private final List<String> productNamesList = new LinkedList<>();
-    private final List<ProductInBasket> productInBasketList = new LinkedList<>();
+public class BasketImpl implements Basket {
+    private static final Logger log = LogManager.getLogger(BasketImpl.class);
+    private final Map<String, Integer> productMap = new HashMap<>();
 
     /**
      * This method allows to add product to the basket
@@ -20,17 +21,14 @@ public class BasketImplementation implements Basket {
     @Override
     public void addProduct(String product, int quantity) {
         if (quantity > 0) {
-            ProductInBasket productInBasket = new ProductInBasket(product, quantity);
-            if (productNamesList.contains(product)) {
-                updateProductQuantity(product, getProductQuantity(product) + quantity);
+            if (productMap.containsKey(product)) {
+                updateProductQuantity(product, productMap.get(product) + quantity);
             } else {
-                productNamesList.add(product);
-                productInBasketList.add(productInBasket);
+                productMap.put(product, quantity);
             }
             log.info("{} item(s) of {} was/were added to the basket", quantity, product);
         } else {
-            log.error("Quantity cannot be less than 1");
-            System.exit(2);
+            log.error("Quantity cannot be less than 1. The product was not added");
         }
     }
 
@@ -41,14 +39,11 @@ public class BasketImplementation implements Basket {
      */
     @Override
     public void removeProduct(String product) {
-        if (productNamesList.contains(product)) {
-            int productIndex = productNamesList.indexOf(product);
-            productInBasketList.remove(productIndex);
-            productNamesList.remove(productIndex);
+        if (productMap.containsKey(product)) {
+            productMap.remove(product);
             log.info("The {} was fully removed from the basket", product);
         } else {
-            log.error("Deletion of non-existent product");
-            System.exit(1);
+            log.error("Deletion of non-existent product. The product was not removed");
         }
     }
 
@@ -61,12 +56,11 @@ public class BasketImplementation implements Basket {
      */
     @Override
     public void updateProductQuantity(String product, int quantity) {
-        if (productNamesList.contains(product)) {
-            int productIndex = productNamesList.indexOf(product);
-            productInBasketList.get(productIndex).setQuantity(quantity);
-        } else {
-            log.error("Non-existent product quantity is updated");
-            System.exit(1);
+        for (Map.Entry<String, Integer> pair : productMap.entrySet()) {
+            if (product.equals(pair.getKey())) {
+                pair.setValue(quantity);
+                break;
+            }
         }
     }
 
@@ -75,8 +69,7 @@ public class BasketImplementation implements Basket {
      */
     @Override
     public void clear() {
-        productInBasketList.clear();
-        productNamesList.clear();
+        productMap.clear();
         log.info("The basket was released");
     }
 
@@ -88,7 +81,7 @@ public class BasketImplementation implements Basket {
      */
     @Override
     public List<String> getProducts() {
-        return productNamesList;
+        return new ArrayList<>(productMap.keySet());
     }
 
     /**
@@ -100,12 +93,10 @@ public class BasketImplementation implements Basket {
      */
     @Override
     public int getProductQuantity(String product) {
-        if (productNamesList.contains(product)) {
-            int productIndex = productNamesList.indexOf(product);
-            return productInBasketList.get(productIndex).getQuantity();
+        if (productMap.containsKey(product)) {
+            return productMap.get(product);
         } else {
             log.error("Non-existent product quantity is checked");
-            System.exit(1);
             return -1;
         }
     }
