@@ -7,6 +7,13 @@ public class Person {
     private final String name;
     private final String gender;
 
+    /**
+     * This is constructor for the Person class
+     *
+     * @param age    The age of a person
+     * @param name   The name of a person
+     * @param gender The gender of a person
+     */
     public Person(int age, String name, String gender) {
         this.age = age;
         this.name = name;
