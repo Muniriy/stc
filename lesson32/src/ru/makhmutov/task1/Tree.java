@@ -10,9 +10,9 @@ public class Tree<T extends Comparable<T>> {
     private static final Logger log = LogManager.getLogger(Tree.class);
     private final List<T> listForPrint = new ArrayList<>();
     private T val;
-    private Tree left;
-    private Tree right;
-    private Tree parent;
+    private Tree<T> left;
+    private Tree<T> right;
+    private Tree<T> parent;
 
     /**
      * The constructor for Tree class
@@ -20,7 +20,7 @@ public class Tree<T extends Comparable<T>> {
      * @param val    The value of a node
      * @param parent The parent of a node
      */
-    public Tree(T val, Tree parent) {
+    public Tree(T val, Tree<T> parent) {
         this.val = val;
         this.parent = parent;
     }
@@ -34,7 +34,7 @@ public class Tree<T extends Comparable<T>> {
      *
      * @return Pointer to the left node
      */
-    public Tree left() {
+    public Tree<T> left() {
         return left;
     }
 
@@ -43,7 +43,7 @@ public class Tree<T extends Comparable<T>> {
      *
      * @return Pointer to the right node
      */
-    public Tree right() {
+    public Tree<T> right() {
         return right;
     }
 
@@ -52,7 +52,7 @@ public class Tree<T extends Comparable<T>> {
      *
      * @return Pointer to the parent node
      */
-    public Tree parent() {
+    public Tree<T> parent() {
         return parent;
     }
 
@@ -61,7 +61,8 @@ public class Tree<T extends Comparable<T>> {
      *
      * @param vals The values of new nodes
      */
-    public void add(T... vals) {
+    @SafeVarargs
+    public final void add(T... vals) {
         for (T v : vals) {
             add(v);
         }
@@ -75,14 +76,14 @@ public class Tree<T extends Comparable<T>> {
     public void add(T val) {
         if (val.compareTo(this.val) < 0) {
             if (this.left == null) {
-                this.left = new Tree(val, this);
-            } else if (this.left != null) {
+                this.left = new Tree<>(val, this);
+            } else {
                 this.left.add(val);
             }
         } else {
             if (this.right == null) {
-                this.right = new Tree(val, this);
-            } else if (this.right != null) {
+                this.right = new Tree<>(val, this);
+            } else {
                 this.right.add(val);
             }
         }
@@ -267,17 +268,14 @@ public class Tree<T extends Comparable<T>> {
      */
     private void recursiveLeafFinder(Tree<T> node, StringBuilder sb) {
         if (node.left == null && node.right == null) {
-            if (node.val != null) {
-                sb.append(node.val);
-                sb.append(" ");
-            }
-        } else {
-            if (node.left != null) {
-                recursiveLeafFinder(node.left, sb);
-            }
-            if (node.right != null) {
-                recursiveLeafFinder(node.right, sb);
-            }
+            sb.append(node.val).append(" ");
+            return;
+        }
+        if (node.left != null) {
+            recursiveLeafFinder(node.left, sb);
+        }
+        if (node.right != null) {
+            recursiveLeafFinder(node.right, sb);
         }
     }
 
