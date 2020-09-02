@@ -90,7 +90,6 @@ public class Person {
         result = prime * result + ((gender == null) ? 0 : gender.hashCode());
         result = prime * result + age;
         return result;
-//        return super.hashCode();
     }
 
     /**
@@ -151,7 +150,6 @@ public class Person {
         return gender.equals(person.gender) &&
                 name.equals(person.name) &&
                 age == person.age;
-//        return super.equals(obj);
     }
 
     /**
@@ -178,6 +176,5 @@ public class Person {
     @Override
     public String toString() {
         return "[Имя: " + name + ", возраст: " + age + ", пол: " + gender + "]";
-//        return super.toString();
     }
 }
