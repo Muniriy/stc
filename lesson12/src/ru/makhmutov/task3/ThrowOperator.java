@@ -4,8 +4,8 @@ import java.util.Scanner;
 
 public class ThrowOperator {
 
-    private static final int MINIMAL_STRING_LENGTH = 2;
     private static final String FORBIDDEN_MESSAGE = "Hello, World!";
+    private static final int MINIMAL_STRING_LENGTH = 2;
 
     /**
      * The entry point of ThrowOperator program.
