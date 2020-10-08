@@ -1,3 +1,3 @@
 # stc
 
-This project contains modules for STC Java course. Each module represents exact lesson
+This project contains modules for STC26 Java course. Each module represents exact lesson
